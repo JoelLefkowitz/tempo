@@ -4,6 +4,7 @@ from datetime import date
 from glob import glob
 
 project = "Tempo"
+package = "tempo"
 version = "0.0.0"
 
 project_copyright = f"{date.today().year} Joel Lefkowitz"
