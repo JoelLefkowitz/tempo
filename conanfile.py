@@ -11,7 +11,11 @@ class Recipe(ConanFile):
         self.test_requires("gtest/1.12.1")
 
     def export_sources(self):
-        for source in ["src/*.[cht]pp", "SConstruct.py"]:
+        for source in [
+            "conanfile.py",
+            "SConstruct.py",
+            "src/*.[cht]pp",
+        ]:
             copy(
                 self,
                 source,
@@ -23,7 +27,7 @@ class Recipe(ConanFile):
         SConsDeps(self).generate()
 
     def build(self):
-        self.run("scons shared")
+        self.run("scons runtime")
 
     def package(self):
         copy(

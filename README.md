@@ -7,7 +7,11 @@ Simplified std::chrono interface.
 
 ## Installing
 
-You can download the [sources](https://download-directory.github.io?url=https://github.com/joellefkowitz/tempo/tree/master/src).
+```bash
+conan search tempo
+```
+
+You can also download the [sources](https://download-directory.github.io?url=https://github.com/joellefkowitz/tempo/tree/master/src).
 
 ## Documentation
 

@@ -1,6 +1,7 @@
 #ifndef TEMPO_MODELS_DEBOUNCER_TPP
 #define TEMPO_MODELS_DEBOUNCER_TPP
 
+#include "../services/time.hpp"
 #include "debouncer.hpp"
 #include <functional>
 

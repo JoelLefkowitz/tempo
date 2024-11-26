@@ -1,7 +1,8 @@
 #ifndef TEMPO_MODELS_TIMER_HPP
 #define TEMPO_MODELS_TIMER_HPP
 
-#include "time.hpp"
+// cppclean-disable-next-line
+#include "../services/time.hpp"
 
 namespace tempo {
     class Timer {

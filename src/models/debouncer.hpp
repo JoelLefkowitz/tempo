@@ -1,11 +1,12 @@
 #ifndef TEMPO_MODELS_DEBOUNCER_HPP
 #define TEMPO_MODELS_DEBOUNCER_HPP
 
-#include "time.hpp"
 #include <functional>
 
-namespace tempo {
+// cppclean-disable-next-line
+#include "../services/time.hpp"
 
+namespace tempo {
     template <typename T>
     class Debouncer {
         std::function<void(T)> call;
