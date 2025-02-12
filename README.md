@@ -2,7 +2,7 @@
 
 Simplified std::chrono interface.
 
-![Review](https://img.shields.io/github/actions/workflow/status/JoelLefkowitz/tempo/review.yml)
+![Review](https://img.shields.io/github/actions/workflow/status/JoelLefkowitz/tempo/review.yaml)
 ![Quality](https://img.shields.io/codacy/grade/_)
 
 ## Installing
@@ -11,7 +11,7 @@ Simplified std::chrono interface.
 conan search tempo
 ```
 
-You can also download the [sources](https://download-directory.github.io?url=https://github.com/joellefkowitz/tempo/tree/master/src).
+You can also download the [sources](https://download-directory.github.io?url=https://github.com/JoelLefkowitz/tempo/tree/master/src).
 
 ## Documentation
 

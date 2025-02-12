@@ -1,4 +1,4 @@
-from conanfile import Recipe
+from conanfile import TempoConan
 from miniscons import (
     Build,
     Flag,
@@ -12,14 +12,14 @@ from miniscons import (
 )
 from walkmate import tree
 
-env = conan()
+env = conan(source="build/conan/SConscript_conandeps")
 
 runtime = Build(
-    "runtime",
+    "build",
     tree("src", r"(?<!\.spec)\.cpp$", ["test.cpp"]),
     flags("c++11"),
     shared=True,
-    rename=Recipe.name,
+    rename=TempoConan.name,
 )
 
 tests = Build(
@@ -40,11 +40,6 @@ includes = tests.packages["CPPPATH"]
 cspell = Script(
     "cspell",
     ["npx", "cspell", ".", "--dot", "--gitignore"],
-)
-
-cppclean = Script(
-    "cppclean",
-    ["cppclean", "."],
 )
 
 cppcheck = Script(
@@ -68,7 +63,7 @@ clang_tidy = Script(
 
 trufflehog = Script(
     "trufflehog",
-    ["trufflehog3"],
+    ["trufflehog3", "-c", ".trufflehog3.yaml"],
 )
 
 clang_format = Script(
@@ -104,7 +99,7 @@ sphinx = Script(
 
 lint = Routine(
     "lint",
-    [cspell, cppclean, cppcheck, clang_tidy, trufflehog],
+    [cspell, cppcheck, trufflehog],
 )
 
 fmt = Routine(
@@ -120,7 +115,7 @@ docs = Routine(
 cli = Tasks(
     [runtime, tests],
     [test],
-    [*lint.scripts, *fmt.scripts, *docs.scripts],
+    [*lint.scripts, *fmt.scripts, *docs.scripts, cppcheck, clang_tidy],
     [lint, fmt, docs],
 )
 
