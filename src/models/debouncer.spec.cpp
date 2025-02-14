@@ -1,8 +1,9 @@
 #include "debouncer.tpp"
-#include "../services/async.hpp"
 #include <chrono>
 #include <functional>
+#include <future>
 #include <gtest/gtest.h>
+#include <thread>
 #include <vector>
 
 using namespace tempo;
@@ -10,15 +11,18 @@ using namespace tempo;
 TEST(Debouncer, Call) {
     std::vector<int> vec;
 
-    std::function<void(int)> push = [&vec](int x) { vec.push_back(x); };
+    std::function<void(int)> push = [&vec](int x) {
+        vec.push_back(x);
+    };
 
-    Debouncer<int> debouncer(push, 0.2);
+    std::chrono::milliseconds delay(10);
 
-    wait_for(std::function<void()>([&debouncer]() { debouncer(1); }), std::chrono::milliseconds(100));
-    wait_for(std::function<void()>([&debouncer]() { debouncer(2); }), std::chrono::milliseconds(200));
-    wait_for(std::function<void()>([&debouncer]() { debouncer(3); }), std::chrono::milliseconds(300));
-    wait_for(std::function<void()>([&debouncer]() { debouncer(4); }), std::chrono::milliseconds(400));
-    wait_for(std::function<void()>([&debouncer]() { debouncer(5); }), std::chrono::milliseconds(500));
+    Debouncer<int> debouncer(push, delay * 2);
 
-    EXPECT_EQ(vec, std::vector<int>({1, 3}));
+    for (int i = 1; i <= 5; ++i) {
+        std::this_thread::sleep_for(delay);
+        debouncer(i);
+    }
+
+    EXPECT_EQ(vec, std::vector<int>({1, 3, 5}));
 }

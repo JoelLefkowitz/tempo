@@ -10,13 +10,12 @@ namespace tempo {
     template <typename T>
     class Debouncer {
         std::function<void(T)> call;
-
-        double delay;
+        std::chrono::milliseconds delay;
 
       public:
         SteadyClock::time_point available = SteadyClock::now();
 
-        explicit Debouncer(const std::function<void(T)> &call, double delay = 0.1);
+        explicit Debouncer(const std::function<void(T)> &call, std::chrono::milliseconds delay);
 
         void operator()(T input);
     };

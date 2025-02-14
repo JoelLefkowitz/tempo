@@ -36,6 +36,8 @@ class TempoConan(ConanFile):
         "LICENSE.md",
     )
 
+    requires = ("funky/0.1.0",)
+
     def layout(self):
         basic_layout(self, src_folder="src")
 

@@ -4,15 +4,20 @@
 #include "../services/time.hpp"
 #include "debouncer.hpp"
 #include <functional>
+#include <iostream>
 
 template <typename T>
-tempo::Debouncer<T>::Debouncer(const std::function<void(T)> &call, double delay) : call(call)
-                                                                                 , delay(delay) {}
+tempo::Debouncer<T>::Debouncer(const std::function<void(T)> &call, std::chrono::milliseconds delay)
+    : call(call)
+    , delay(delay) {
+}
 
 template <typename T>
 void tempo::Debouncer<T>::operator()(T input) {
-    if (tempo::SteadyClock::now() > available) {
-        available += tempo::duration(delay);
+    auto now = tempo::SteadyClock::now();
+
+    if (now > available) {
+        available = now + delay;
         call(input);
     }
 }

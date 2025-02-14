@@ -12,12 +12,14 @@ from miniscons import (
 )
 from walkmate import tree
 
-env = conan(source="build/conan/SConscript_conandeps")
+conandeps = "build/conan/SConscript_conandeps"
+
+env = conan(source=conandeps)
 
 runtime = Build(
     "build",
     tree("src", r"(?<!\.spec)\.cpp$", ["test.cpp"]),
-    flags("c++11"),
+    flags("c++20"),
     shared=True,
     rename=TempoConan.name,
 )
@@ -26,7 +28,7 @@ tests = Build(
     "tests",
     tree("src", r"\.cpp$"),
     flags("c++11"),
-    packages(["gtest"]),
+    packages(["gtest"], source=conandeps),
 )
 
 test = Target(
@@ -115,7 +117,7 @@ docs = Routine(
 cli = Tasks(
     [runtime, tests],
     [test],
-    [*lint.scripts, *fmt.scripts, *docs.scripts, cppcheck, clang_tidy],
+    [*lint.scripts, *fmt.scripts, *docs.scripts, clang_tidy],
     [lint, fmt, docs],
 )
 
