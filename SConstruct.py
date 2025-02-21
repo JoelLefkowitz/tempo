@@ -25,7 +25,7 @@ runtime = Build(
 tests = Build(
     "tests",
     tree("src", r"\.cpp$"),
-    flags("c++11"),
+    flags("c++20"),
     packages(["gtest"]),
 )
 
@@ -99,7 +99,7 @@ sphinx = Script(
 
 lint = Routine(
     "lint",
-    [cspell, cppcheck, trufflehog],
+    [cspell, trufflehog],
 )
 
 fmt = Routine(

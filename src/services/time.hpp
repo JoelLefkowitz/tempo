@@ -7,7 +7,7 @@
 namespace tempo {
     using SteadyClock = std::chrono::steady_clock;
     using SystemClock = std::chrono::system_clock;
-    
+
     SteadyClock::time_point now();
     SteadyClock::duration duration(double time);
 

@@ -1,6 +1,11 @@
-#include <tempo/time.hpp>
+#include <tempo/models/debouncer.tpp>
 
 int main() {
-    tempo::now();
+    tempo::Debouncer<int> debouncer(
+        [](auto _) {
+        },
+        std::chrono::milliseconds(10)
+    );
+
     return 0;
 }
