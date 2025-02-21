@@ -1,7 +1,7 @@
 [project]
 name = "tempo"
 description = "Simplified std::chrono interface."
-version = "0.0.0"
+version = "0.1.0"
 
 keywords = ["time", "chrono", "delta", "timestamp", "debounce"]
 
