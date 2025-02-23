@@ -5,7 +5,7 @@ from conan.tools.layout import basic_layout
 
 
 class TempoConan(ConanFile):
-    requires = ("funky/0.2.1",)
+    requires = ("funky/0.3.0",)
 
     def layout(self):
         basic_layout(self, src_folder="src")
